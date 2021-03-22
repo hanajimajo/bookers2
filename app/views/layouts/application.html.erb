@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <script src="https://kit.fontawesome.com/ca1289ead1.js" crossorigin="anonymous"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+      <a class="navbar-brand" href="/"><span>Bookers</span></a>
+      <ul class="navbar-nav ml-auto">
+        </ul>
+
+      <% if user_signed_in? %>
+        <a class="fas fa-home nav-link text-light" href="">
+         Home
+        </a>
+        <a class="fas fa-users nav-link text-light" href="/users">
+         Users
+        </a>
+        <a class="fas fa-book-open nav-link text-light" href="/books">
+         Books
+        </a>
+        <a class="fas fa-sign-out-alt nav-link text-light" rel="nofollow" data-method="delete" href="/users/sign_out">
+         logout
+        </a>
+
+        <% else %>
+        <a class="fas fa-home nav-link text-light" href="/">
+         Home
+        </a>
+
+        <a class="fas fa-link nav-link text-light" href="/homes/about">
+         About
+        </a>
+
+        <a class="fas fa-user-plus nav-link text-light" href="/users/sign_up">
+         sign up
+        </a>
+
+        <a class="fas fa-sign-in-alt nav-link text-light" href="/users/sign_in">
+         login
+        </a>
+
+      <% end %>
+      </ul>
+      </div>
+    </nav>
+
+    <%= yield %>
+
+<!--footer-->
+  <footer class= "container mt-5">
+    <div class= "row">
+      <div class= "mx-auto">
+        <p>CopyRight Infratop.inc</p>
+      </div>
+    </div>
+  </footer>
+
+  </body>
+</html>
