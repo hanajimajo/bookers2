@@ -20,15 +20,6 @@ ActiveRecord::Schema.define(version: 2021_03_22_101953) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "post_books", force: :cascade do |t|
-    t.string "book_title"
-    t.string "book_id"
-    t.text "opinion"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

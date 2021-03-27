@@ -1,12 +1,79 @@
-<% @post_images.each do |post_image| %>
-<div>
-  <%= link_to post_image_path(post_image.id) do %>
-    <%= attachment_image_tag post_image, :image %>
-  <% end %>
-  <p>投稿ユーザー画像：<%= image_tag('sample-author1.jpg') %></p>
-  <p>ショップ名：<%= post_image.shop_name %></p>
-  <p>説明：<%= post_image.caption %></p>
-  <p>ユーザーネーム：<%= post_image.user.name %></p>
-</div>
+<% if flash[:notice] %>
+  <p id="notice">
+    <%= flash[:notice] %>
+  </p>
 <% end %>
-<%= paginate @post_images %>
+
+
+
+  <div class="container px-5 px-sm-0">
+    <div class="row">
+      <div class="col-md-3">
+        <h2 class="mt-3">User info</h2>
+         <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+          <table class="table">
+            <tbody>
+              <tr>
+      　         <th>name</th>
+       　        <th><%= @user.name %></th>
+       　      </tr>
+       　      <tr>
+      　         <th>introduction</th>
+      　         <th><%= @user.introduction %></th>
+      　       </tr>
+            </tbody>
+          </table>
+          <div class ="row">
+           <p><%= link_to "", edit_user_path(@user), class: 'fas fa-user-cog' %></p>
+          </div>
+
+          <table class="table">
+            <h2 class="mt-3">New book</h2>
+            <%= form_with model:@book, local:true do |f| %>
+
+            <div class="form-group">
+            <label for="book_title">Title</label>
+            <p><%= f.text_field :title, :class => "form-control" %></p>
+          </div>
+
+          <div class="form-group">
+            <label for="book_body">Opinion</label>
+            <p><%= f.text_area :body, :class => "form-control" %></p>
+
+            <%= f.submit 'Create Book' %>
+          </div>
+
+            <% end %>
+
+          </table>
+      </div>
+
+      <div class="col-md-8 offset-md-1">
+         <h2>Books</h2>
+         <table class="table table table-hover table-inverse">
+
+           <thead>
+             <tr>
+               <th></th>
+               <th>Title</th>
+               <th>Opinion</th>
+               <th colspan="3"></th>
+             </tr>
+           </thead>
+
+
+          <tbody>
+            <% @books.each do |book| %>
+            <tr>
+              <th> <%=link_to attachment_image_tag book.user, :profile_image, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", size:'30x30' %></th>
+              <th><%= link_to book.title, book_path(book.id) %></th>
+              <td><%= book.body %></td>
+            <% end %>
+            </tr>
+          </tbody>
+
+         </table>
+
+      </div>
+    </div>
+  </div>
